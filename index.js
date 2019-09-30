@@ -27,14 +27,16 @@ if(app.get('env')==='development'){
 
 //configuration
 console.log('Application Name:'+config.get('name'));
-console.log('Mail Server: '+config.get('mail.host'));
-console.log('Mail Password: '+config.get('mail.password'));
+// console.log('Mail Server: '+config.get('mail.host'));
+// console.log('Mail Password: '+config.get('mail.password'));
 
 
 //PORT : env variables
 const port=process.env.PORT || 3000;
 
-app.listen(port, ()=> logger.info(`Listening on port ${port}`) );
+const server=app.listen(port, ()=> logger.info(`Listening on port ${port}`) );
+
+module.exports=server
 
 //Test rejection error
 /* // const p= Promise.reject(new Error('Something failed miserably'));

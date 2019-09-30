@@ -1,5 +1,8 @@
 
-const asyncMiddleware = require('../middleware/async');
+
+
+
+const validateObjectId = require('../middleware/validateObjectId');
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
 
@@ -9,7 +12,7 @@ const router =express.Router();
 
   router.get('/',async (req,res)=>{
 
-    throw new Error('Could not get the authors');
+    //throw new Error('Could not get the authors');
 
     res.send(await Author.find().sort('name'));
    
@@ -17,7 +20,9 @@ const router =express.Router();
     
   });
   
-  router.get('/:id', async (req,res)=>{
+  router.get('/:id', validateObjectId,async (req,res)=>{
+
+  
     const author=await Author.findById(req.params.id)
      // let: reset later 
      if(!author){ return res.status(404).send('The course with the given ID not found')} // 404 object not found
@@ -33,7 +38,6 @@ const router =express.Router();
       if(error){
           //400 bad request
          
-            
           return  res.status(400).send(error.details[0].message);;
       }
      

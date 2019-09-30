@@ -31,7 +31,7 @@ const Author = mongoose.model('Author',authorSchema);
   function validateAuthor(author){
   
     const schema = Joi.object({
-       name: Joi.string().min(3).max(50).required()
+       name: Joi.string().min(4).max(50).required()
        
     });
 
